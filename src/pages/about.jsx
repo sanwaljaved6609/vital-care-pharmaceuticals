@@ -31,7 +31,7 @@ function About() {
                         <div className="space-y-4">
                             <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=800&auto=format&fit=crop" className="rounded-3xl shadow-lg" alt="About 1" />
                             <div className="bg-primary/10 dark:bg-primary/20 p-8 rounded-3xl">
-                                <h4 className="text-3xl font-bold text-primary mb-1">15+</h4>
+                                <h4 className="text-3xl font-bold text-primary mb-1">4+</h4>
                                 <p className="text-sm font-bold opacity-70">Years of Experience</p>
                             </div>
                         </div>

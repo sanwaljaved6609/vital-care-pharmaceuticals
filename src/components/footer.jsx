@@ -47,13 +47,13 @@ function Footer() {
                     <h3 className="text-white font-bold text-lg mb-6">Contact Us</h3>
                     <ul className="space-y-4 text-sm">
                         <li className="flex items-center space-x-3">
-                            <span>info@vitalcare.com</span>
+                            <span>hamzarazzaq6172@gmail.com</span>
                         </li>
                         <li className="flex items-center space-x-3">
-                            <span>+92 300 0000000</span>
+                            <span>+92 301 4864882</span>
                         </li>
                         <li className="flex items-start space-x-3">
-                            <span>123 Pharma Heights, Karachi, Pakistan</span>
+                            <span>Township, Lahore, Pakistan</span>
                         </li>
                     </ul>
                 </div>

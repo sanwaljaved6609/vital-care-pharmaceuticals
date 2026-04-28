@@ -15,10 +15,10 @@ function Contact() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const { name, email, subject, message } = formData;
-        
+
         const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
-        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=info@vitalcare.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=hamzarazzaq6172@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
         window.open(gmailUrl, '_blank');
     };
 
@@ -29,7 +29,7 @@ function Contact() {
     return (
         <div className="pt-32 pb-20 dark:bg-slate-900 dark:text-white">
             <div className="max-w-7xl mx-auto px-6">
-                
+
                 <div className="grid lg:grid-cols-2 gap-16">
                     {/* Info Side */}
                     <AnimatedSection>
@@ -37,7 +37,7 @@ function Contact() {
                             Let's start a <span className="text-primary">conversation</span>
                         </h1>
                         <p className="text-lg text-slate-600 dark:text-slate-400 mb-12 leading-relaxed max-w-lg">
-                            Whether you're a healthcare professional looking for specific products or a potential partner, 
+                            Whether you're a healthcare professional looking for specific products or a potential partner,
                             we're here to help you provide better care.
                         </p>
 
@@ -48,7 +48,7 @@ function Contact() {
                                 </div>
                                 <div>
                                     <h4 className="font-bold text-xl mb-1">Phone</h4>
-                                    <p className="text-slate-600 dark:text-slate-400">+92 300 0000000</p>
+                                    <p className="text-slate-600 dark:text-slate-400">+92 301 4864882</p>
                                     <p className="text-xs text-primary font-bold mt-1 uppercase tracking-wider">Mon - Fri, 9am - 6pm</p>
                                 </div>
                             </div>
@@ -59,7 +59,7 @@ function Contact() {
                                 </div>
                                 <div>
                                     <h4 className="font-bold text-xl mb-1">Email</h4>
-                                    <p className="text-slate-600 dark:text-slate-400">info@vitalcare.com</p>
+                                    <p className="text-slate-600 dark:text-slate-400">hamzarazzaq6172@gmail.com</p>
                                     <p className="text-xs text-accent font-bold mt-1 uppercase tracking-wider">We reply within 24h</p>
                                 </div>
                             </div>
@@ -71,8 +71,7 @@ function Contact() {
                                 <div>
                                     <h4 className="font-bold text-xl mb-1">Headquarters</h4>
                                     <p className="text-slate-600 dark:text-slate-400">
-                                        123 Pharma Heights, Business District<br />
-                                        Karachi, Pakistan
+                                        Township, Lahore, Pakistan
                                     </p>
                                 </div>
                             </div>
@@ -86,7 +85,7 @@ function Contact() {
                                 <MessageCircle className="text-primary" />
                                 <span>Send us a message</span>
                             </h3>
-                            
+
                             <form className="space-y-6" onSubmit={handleSubmit}>
                                 <div className="grid md:grid-cols-2 gap-6">
                                     <div className="space-y-2">
@@ -117,7 +116,7 @@ function Contact() {
 
                                 <div className="space-y-2">
                                     <label className="text-sm font-bold opacity-70 ml-1">Subject</label>
-                                    <select 
+                                    <select
                                         name="subject"
                                         value={formData.subject}
                                         onChange={handleChange}
@@ -141,7 +140,7 @@ function Contact() {
                                     ></textarea>
                                 </div>
 
-                                <button 
+                                <button
                                     type="submit"
                                     className="w-full bg-primary text-white py-5 rounded-2xl font-bold text-lg shadow-xl shadow-primary/30 hover:bg-primary-dark transition-all hover:scale-[1.02] flex items-center justify-center space-x-3"
                                 >
@@ -158,4 +157,4 @@ function Contact() {
 }
 
 export default Contact;
-
+

@@ -1,28 +1,45 @@
+import gynecologyMedicine from "../assets/gynecology-medicine.png";
+
 const products = [
     {
         category: "Gynecology",
         items: [
             {
                 id: 1,
-                name: "FemCare Plus",
-                image: "/C:/Users/cp/.gemini/antigravity/brain/482a9d10-6b8a-4573-99ff-c35556c851b7/gynecology_medicine_1777384460084.png",
-                description: "A comprehensive supplement for women's reproductive health and hormonal balance.",
+                name: "Minotol-D Sachet",
+                image: gynecologyMedicine,
+                description: "A specialized formula with Myo-inositol and D-chiro-inositol to support PCOS management and hormonal balance.",
                 tag: "Bestseller"
             },
             {
                 id: 2,
-                name: "UtroSafe",
+                name: "Nutri Vit Milk Suplement",
                 image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=800&auto=format&fit=crop",
-                description: "Supports uterine health and helps regulate menstrual cycles effectively.",
+                description: "A premium nutritional milk supplement enriched with essential vitamins and minerals for overall health and vitality.",
                 tag: "New"
             },
             {
                 id: 3,
-                name: "PregnaVit",
+                name: "Ipical Tablet",
                 image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=800&auto=format&fit=crop",
-                description: "Prenatal vitamins designed for healthy pregnancy and fetal development.",
+                description: "A calcium and vitamin D3 supplement designed to support bone density and prevent calcium deficiency.",
                 tag: "Essential"
             },
+            {
+                id: 4,
+                name: "Sleft-D Oral Solution",
+                image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=800&auto=format&fit=crop",
+                description: "An effective Vitamin D3 oral solution to support immune function and maintain healthy bones.",
+                tag: "Essential"
+            },
+            {
+                id: 5,
+                name: "U-Cry Sachet",
+                image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=800&auto=format&fit=crop",
+                description: "A urinary tract health supplement formulated to support bladder health and prevent recurrent infections.",
+                tag: "Essential"
+            }
+
         ],
     },
 
@@ -31,24 +48,17 @@ const products = [
         items: [
             {
                 id: 4,
-                name: "Cefroxin 500",
+                name: "Azixun 250mg Capsule",
                 image: "https://images.unsplash.com/photo-1471864190281-ad5f9f81ce4c?q=80&w=800&auto=format&fit=crop",
-                description: "Broad-spectrum antibiotic used to treat bacterial infections with high efficacy.",
+                description: "A broad-spectrum Azithromycin antibiotic used to treat various bacterial infections effectively.",
                 tag: "Critical Care"
             },
             {
                 id: 5,
-                name: "Azicure",
+                name: "Q-Sun Tablet 400mg",
                 image: "https://images.unsplash.com/photo-1587854692152-cbe660dbbb88?q=80&w=800&auto=format&fit=crop",
-                description: "Effective treatment for respiratory and skin infections, fast-acting formula.",
+                description: "A potent antibiotic effective against respiratory, skin, and soft tissue infections.",
                 tag: "Trusted"
-            },
-            {
-                id: 6,
-                name: "Moxilin DS",
-                image: "https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?q=80&w=800&auto=format&fit=crop",
-                description: "Advanced antibiotic formulation for severe infections, pediatric friendly.",
-                tag: "Pediatric"
             },
         ],
     },
@@ -58,27 +68,34 @@ const products = [
         items: [
             {
                 id: 7,
-                name: "PainRelief Max",
+                name: "Rheuma-T Tablet 20mg",
                 image: "https://images.unsplash.com/photo-1550572017-ed200159d8d4?q=80&w=800&auto=format&fit=crop",
-                description: "Fast-acting relief from headaches, muscle pain, and fever.",
+                description: "Anti-inflammatory and analgesic medication for the management of rheumatoid arthritis and joint pain.",
                 tag: "OTC"
             },
             {
                 id: 8,
-                name: "AllerFree",
+                name: "T-Leaf Syrup",
                 image: "https://images.unsplash.com/photo-1512428559083-a40ea901463e?q=80&w=800&auto=format&fit=crop",
-                description: "Effective anti-allergy medicine for seasonal and chronic allergies.",
+                description: "A natural herbal cough syrup that provides soothing relief from both dry and productive coughs.",
                 tag: "Allergy"
             },
             {
                 id: 9,
-                name: "VitaBoost",
+                name: "Ipical Syrup",
                 image: "https://images.unsplash.com/photo-1514733670139-4d87a1941d55?q=80&w=800&auto=format&fit=crop",
-                description: "Multivitamin supplement to enhance immunity and energy levels.",
+                description: "A liquid calcium supplement formulated to support healthy bone and teeth development in all ages.",
                 tag: "Immunity"
+            },
+            {
+                id: 10,
+                name: "Sip-Up Syrup",
+                image: "https://images.unsplash.com/photo-1514733670139-4d87a1941d55?q=80&w=800&auto=format&fit=crop",
+                description: "An effective antacid syrup that provides fast relief from heartburn, acid indigestion, and sour stomach.",
+                tag: "Digestive Care"
             },
         ],
     },
 ];
 
-export default products;
+export default products;
