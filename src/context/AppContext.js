@@ -75,14 +75,20 @@ export const AppProvider = ({ children }) => {
   }, [language]);
 
   const toggleTheme = () => setTheme(prev => prev === 'light' ? 'dark' : 'light');
-
+  
   const t = translations[language];
 
   return (
-    <AppContext.Provider value={{ theme, toggleTheme, language, setLanguage, t }}>
+    <AppContext.Provider value={{ 
+      theme, toggleTheme, 
+      language, setLanguage, 
+      t 
+    }}>
       {children}
     </AppContext.Provider>
   );
 };
+
+
 
 export const useApp = () => useContext(AppContext);

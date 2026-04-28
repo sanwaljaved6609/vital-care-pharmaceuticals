@@ -1,10 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useApp } from "../context/AppContext";
 import AnimatedSection from "../components/AnimatedSection";
 import { Mail, Phone, MapPin, Send, MessageCircle } from "lucide-react";
 
 function Contact() {
     const { t } = useApp();
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        subject: 'Product Inquiry',
+        message: ''
+    });
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const { name, email, subject, message } = formData;
+        
+        const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=info@vitalcare.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        
+        window.open(gmailUrl, '_blank');
+    };
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
 
     return (
         <div className="pt-32 pb-20 dark:bg-slate-900 dark:text-white">
@@ -67,12 +87,16 @@ function Contact() {
                                 <span>Send us a message</span>
                             </h3>
                             
-                            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+                            <form className="space-y-6" onSubmit={handleSubmit}>
                                 <div className="grid md:grid-cols-2 gap-6">
                                     <div className="space-y-2">
                                         <label className="text-sm font-bold opacity-70 ml-1">{t.contact.name}</label>
                                         <input
                                             type="text"
+                                            name="name"
+                                            required
+                                            value={formData.name}
+                                            onChange={handleChange}
                                             placeholder="John Doe"
                                             className="w-full bg-slate-50 dark:bg-slate-900 border-none p-4 rounded-2xl focus:ring-2 focus:ring-primary/50 transition-all outline-none"
                                         />
@@ -81,6 +105,10 @@ function Contact() {
                                         <label className="text-sm font-bold opacity-70 ml-1">{t.contact.email}</label>
                                         <input
                                             type="email"
+                                            name="email"
+                                            required
+                                            value={formData.email}
+                                            onChange={handleChange}
                                             placeholder="john@example.com"
                                             className="w-full bg-slate-50 dark:bg-slate-900 border-none p-4 rounded-2xl focus:ring-2 focus:ring-primary/50 transition-all outline-none"
                                         />
@@ -89,7 +117,12 @@ function Contact() {
 
                                 <div className="space-y-2">
                                     <label className="text-sm font-bold opacity-70 ml-1">Subject</label>
-                                    <select className="w-full bg-slate-50 dark:bg-slate-900 border-none p-4 rounded-2xl focus:ring-2 focus:ring-primary/50 transition-all outline-none appearance-none">
+                                    <select 
+                                        name="subject"
+                                        value={formData.subject}
+                                        onChange={handleChange}
+                                        className="w-full bg-slate-50 dark:bg-slate-900 border-none p-4 rounded-2xl focus:ring-2 focus:ring-primary/50 transition-all outline-none appearance-none"
+                                    >
                                         <option>Product Inquiry</option>
                                         <option>Partnership Proposal</option>
                                         <option>General Support</option>
@@ -99,12 +132,19 @@ function Contact() {
                                 <div className="space-y-2">
                                     <label className="text-sm font-bold opacity-70 ml-1">{t.contact.message}</label>
                                     <textarea
+                                        name="message"
+                                        required
+                                        value={formData.message}
+                                        onChange={handleChange}
                                         placeholder="How can we help you?"
                                         className="w-full bg-slate-50 dark:bg-slate-900 border-none p-4 rounded-2xl h-40 focus:ring-2 focus:ring-primary/50 transition-all outline-none resize-none"
                                     ></textarea>
                                 </div>
 
-                                <button className="w-full bg-primary text-white py-5 rounded-2xl font-bold text-lg shadow-xl shadow-primary/30 hover:bg-primary-dark transition-all hover:scale-[1.02] flex items-center justify-center space-x-3">
+                                <button 
+                                    type="submit"
+                                    className="w-full bg-primary text-white py-5 rounded-2xl font-bold text-lg shadow-xl shadow-primary/30 hover:bg-primary-dark transition-all hover:scale-[1.02] flex items-center justify-center space-x-3"
+                                >
                                     <span>{t.contact.send}</span>
                                     <Send size={20} />
                                 </button>
@@ -117,4 +157,5 @@ function Contact() {
     );
 }
 
-export default Contact;
+export default Contact;
+

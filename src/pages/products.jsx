@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import products from "../data/products";
 import AnimatedSection from "../components/AnimatedSection";
-import { ShoppingCart, Info } from "lucide-react";
+import { Info } from "lucide-react";
+import ProductModal from "../components/ProductModal";
 
 function Products() {
     const [selectedCategory, setSelectedCategory] = useState("All");
+    const [viewingProduct, setViewingProduct] = useState(null);
+
     const categories = ["All", ...products.map(p => p.category)];
 
     const filteredProducts = selectedCategory === "All"
@@ -17,14 +20,14 @@ function Products() {
                 {/* Header */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
                     <div>
-                        <h1 className="text-4xl lg:text-5xl font-bold dark:text-white mb-4">Our Products</h1>
-                        <p className="text-slate-600 dark:text-slate-400 max-w-xl">
+                        <h1 className="text-4xl lg:text-5xl font-bold dark:text-white mb-4 text-center md:text-left">Our Products</h1>
+                        <p className="text-slate-600 dark:text-slate-400 max-w-xl text-center md:text-left">
                             Explore our comprehensive range of pharmaceutical solutions across multiple specialized categories.
                         </p>
                     </div>
 
                     {/* Category Tabs */}
-                    <div className="flex overflow-x-auto pb-2 gap-2 no-scrollbar">
+                    <div className="flex overflow-x-auto pb-2 gap-2 no-scrollbar justify-center md:justify-end">
                         {categories.map(cat => (
                             <button
                                 key={cat}
@@ -41,12 +44,12 @@ function Products() {
                 </div>
 
                 {/* Grid */}
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
                     {filteredProducts.map((product, i) => (
                         <AnimatedSection key={product.id} delay={i * 0.05}>
                             <div className="group bg-white dark:bg-slate-800 rounded-[32px] overflow-hidden border border-slate-100 dark:border-slate-700 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
                                 {/* Image Container */}
-                                <div className="relative h-64 overflow-hidden">
+                                <div className="relative h-72 overflow-hidden">
                                     <img
                                         src={product.image}
                                         alt={product.name}
@@ -57,25 +60,30 @@ function Products() {
                                             {product.tag}
                                         </span>
                                     </div>
-                                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center space-x-4">
-                                        <button className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary hover:scale-110 transition-transform">
-                                            <ShoppingCart size={20} />
-                                        </button>
-                                        <button className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white hover:scale-110 transition-transform">
-                                            <Info size={20} />
+                                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                        <button
+                                            onClick={(e) => { e.stopPropagation(); setViewingProduct(product); }}
+                                            className="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white hover:scale-110 transition-transform shadow-lg"
+                                        >
+                                            <Info size={28} />
                                         </button>
                                     </div>
                                 </div>
 
                                 {/* Content */}
                                 <div className="p-8">
-                                    <h3 className="text-xl font-bold dark:text-white mb-3">{product.name}</h3>
+                                    <h3 className="text-2xl font-bold dark:text-white mb-3">{product.name}</h3>
                                     <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2">
                                         {product.description}
                                     </p>
-                                    <div className="mt-6 pt-6 border-t border-slate-50 dark:border-slate-700 flex justify-between items-center">
-                                        <span className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">Premium Quality</span>
-                                        <button className="text-primary font-bold text-sm hover:underline">View Details</button>
+                                    <div className="mt-8 pt-6 border-t border-slate-50 dark:border-slate-700 flex justify-between items-center">
+                                        <span className="text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Premium Quality</span>
+                                        <button
+                                            onClick={() => setViewingProduct(product)}
+                                            className="text-primary font-black text-sm hover:underline tracking-tight"
+                                        >
+                                            View Details
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -83,8 +91,18 @@ function Products() {
                     ))}
                 </div>
             </div>
+
+            {/* Product Detail Modal */}
+            {viewingProduct && (
+                <ProductModal
+                    product={viewingProduct}
+                    onClose={() => setViewingProduct(null)}
+                />
+            )}
         </div>
     );
 }
 
 export default Products;
+
+
