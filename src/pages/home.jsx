@@ -1,7 +1,8 @@
 import React from 'react';
 import { useApp } from "../context/AppContext";
 import AnimatedSection from "../components/AnimatedSection";
-import { ArrowRight, ShieldCheck, Activity, Award, FlaskConical } from "lucide-react";
+import { ArrowRight, ShieldCheck, Activity, Award, FlaskConical, Stethoscope, Building, Hospital, Store } from "lucide-react";
+
 import { Link } from "react-router-dom";
 
 function Home() {
@@ -97,7 +98,38 @@ function Home() {
                 </div>
             </section>
 
+            {/* Who We Serve Section */}
+            <section className="py-24">
+                <div className="max-w-7xl mx-auto px-6">
+                    <div className="text-center max-w-3xl mx-auto mb-16">
+                        <h2 className="text-primary font-bold tracking-widest uppercase text-sm mb-4">Target Audience</h2>
+                        <h2 className="text-3xl lg:text-5xl font-bold mb-6">Who We Serve</h2>
+                        <p className="text-slate-600 dark:text-slate-400">
+                            We bridge the gap between innovation and healthcare delivery by supporting a wide range of medical professionals and institutions.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+                        {[
+                            { icon: <Stethoscope size={32} />, title: "Doctors", desc: "Providing specialists with the latest pharmaceutical breakthroughs." },
+                            { icon: <Building size={32} />, title: "Clinics", desc: "Equipping private practices with reliable medical solutions." },
+                            { icon: <Hospital size={32} />, title: "Hospitals", desc: "Supporting large-scale institutions with bulk requirements." },
+                            { icon: <Store size={32} />, title: "Pharmacies", desc: "Ensuring steady supply chains for retail healthcare partners." },
+                        ].map((item, i) => (
+                            <AnimatedSection key={i} delay={i * 0.1} className="text-center group">
+                                <div className="w-24 h-24 bg-slate-50 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-6 transition-all group-hover:bg-primary group-hover:text-white group-hover:scale-110 group-hover:rotate-6 shadow-sm">
+                                    {item.icon}
+                                </div>
+                                <h4 className="text-xl font-bold mb-3">{item.title}</h4>
+                                <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed px-4">{item.desc}</p>
+                            </AnimatedSection>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
             {/* CTA Section */}
+
             <section className="py-24 px-6">
                 <AnimatedSection className="max-w-7xl mx-auto bg-primary rounded-[50px] p-12 lg:p-20 text-center text-white relative overflow-hidden">
                     <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]" />
