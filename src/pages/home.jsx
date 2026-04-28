@@ -14,7 +14,7 @@ function Home() {
             <section className="relative min-h-[90vh] flex items-center pt-20">
                 {/* Background Decoration */}
                 <div className="absolute top-0 right-0 -z-10 w-1/2 h-full bg-primary/5 dark:bg-primary/10 rounded-l-[100px] hidden lg:block" />
-                
+
                 <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
                     <AnimatedSection>
                         <div className="inline-flex items-center space-x-2 bg-primary/10 dark:bg-primary/20 text-primary px-4 py-2 rounded-full text-sm font-bold mb-6">
@@ -23,7 +23,7 @@ function Home() {
                         </div>
                         <h1 className="text-5xl lg:text-7xl font-bold leading-tight mb-6">
                             {t.hero.title.split(' ').map((word, i) => (
-                                <span key={i} className={i >= 3 ? "text-primary" : ""}>
+                                <span key={i} className={i >= 2 ? "text-primary" : ""}>
                                     {word}{" "}
                                 </span>
                             ))}
@@ -37,7 +37,7 @@ function Home() {
                                 className="bg-primary text-white px-8 py-4 rounded-2xl font-bold flex items-center space-x-2 shadow-xl shadow-primary/30 hover:bg-primary-dark transition-all hover:scale-105"
                             >
                                 <span>{t.hero.cta}</span>
-                                <ArrowRight size={20} />
+                                <ArrowRight size={23} />
                             </Link>
                             <Link
                                 to="/about"
@@ -50,9 +50,9 @@ function Home() {
 
                     <AnimatedSection delay={0.2} className="relative">
                         <div className="relative z-10 rounded-[40px] overflow-hidden shadow-2xl">
-                            <img 
-                                src="/C:/Users/cp/.gemini/antigravity/brain/482a9d10-6b8a-4573-99ff-c35556c851b7/pharmaceutical_hero_1777384120790.png" 
-                                alt="Pharmaceutical Excellence" 
+                            <img
+                                src="/C:/Users/cp/.gemini/antigravity/brain/482a9d10-6b8a-4573-99ff-c35556c851b7/pharmaceutical_hero_1777384120790.png"
+                                alt="Pharmaceutical Excellence"
                                 className="w-full h-auto object-cover"
                             />
                         </div>
@@ -63,8 +63,8 @@ function Home() {
                                     <ShieldCheck size={24} />
                                 </div>
                                 <div>
-                                    <p className="text-xs text-slate-500 font-bold uppercase tracking-wider">Quality Assurance</p>
-                                    <p className="text-lg font-bold">100% ISO Certified</p>
+                                    <p className=" font-bold text-slate-400 font-bold uppercase ">100% Quality Assurance</p>
+                                    {/* <p className="text-lg font-bold">100% ISO Certified</p> */}
                                 </div>
                             </div>
                         </div>
@@ -82,9 +82,21 @@ function Home() {
 
                     <div className="grid md:grid-cols-3 gap-8">
                         {[
-                            { icon: <FlaskConical size={32} />, title: "Research Driven", desc: "Our products are backed by extensive clinical research and data." },
-                            { icon: <Award size={32} />, title: "Top Quality", desc: "Manufacturing processes that exceed global regulatory standards." },
-                            { icon: <Activity size={32} />, title: "Patient First", desc: "Every solution is designed to improve patient outcomes significantly." },
+                            {
+                                icon: <FlaskConical size={32} />,
+                                title: "Research Driven",
+                                desc: "Our products are backed by extensive clinical research and data."
+                            },
+                            {
+                                icon: <Award size={32} />,
+                                title: "Top Quality",
+                                desc: "Manufacturing processes that exceed global regulatory standards."
+                            },
+                            {
+                                icon: <Activity size={32} />,
+                                title: "Patient First",
+                                desc: "Every solution is designed to improve patient outcomes significantly."
+                            },
                         ].map((feature, i) => (
                             <AnimatedSection key={i} delay={i * 0.1} className="bg-white dark:bg-slate-800 p-10 rounded-[32px] shadow-sm hover:shadow-xl transition-all hover:-translate-y-2 border border-slate-100 dark:border-slate-700">
                                 <div className="w-16 h-16 bg-primary/10 text-primary rounded-2xl flex items-center justify-center mb-6">
@@ -151,4 +163,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default Home;
