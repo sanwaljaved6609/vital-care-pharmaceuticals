@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MessageCircle } from 'lucide-react';
+import whatsapp from "../assets/whatsapp.png";
 
 const WhatsAppWidget = () => {
     const phoneNumber = "+923014864882";
@@ -15,13 +15,17 @@ const WhatsAppWidget = () => {
             animate={{ scale: 1, opacity: 1 }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="fixed bottom-8 right-8 z-[100] bg-green-500 text-white p-4 rounded-full shadow-2xl shadow-green-500/30 hover:bg-green-600 transition-all flex items-center justify-center group"
+            className="fixed bottom-8 right-8 z-[100] bg-[#25D366] text-white p-3 rounded-full shadow-2xl shadow-green-500/30 hover:bg-[#128C7E] transition-all flex items-center justify-center group"
             title="Chat on WhatsApp"
         >
-            <div className="relative">
-                <MessageCircle size={32} />
+            <div className="relative flex items-center justify-center">
+                <img
+                    src={whatsapp}
+                    alt="WhatsApp"
+                    className="w-10 h-10 object-contain"
+                />
                 <motion.div
-                    animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0, 0.5] }}
+                    animate={{ scale: [1, 1.2, 1], opacity: [0.4, 0, 0.4] }}
                     transition={{ repeat: Infinity, duration: 2 }}
                     className="absolute inset-0 bg-white rounded-full -z-10"
                 />
