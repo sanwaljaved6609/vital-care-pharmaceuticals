@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ShieldCheck, Activity } from 'lucide-react';
+import { X, ShieldCheck, Activity, ShoppingCart, Check } from 'lucide-react';
+import { useCart } from '../context/CartContext';
 
 const ProductModal = ({ product, onClose }) => {
+  const { addToCart } = useCart();
+  const [isAdded, setIsAdded] = useState(false);
+
   if (!product) return null;
+
+  const handleAddToCart = () => {
+    addToCart(product);
+    setIsAdded(true);
+    setTimeout(() => setIsAdded(false), 2000);
+  };
 
   return (
     <AnimatePresence>
@@ -49,12 +59,15 @@ const ProductModal = ({ product, onClose }) => {
             {/* Details Side */}
             <div className="p-8 md:p-12 space-y-8">
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold dark:text-white mb-4">{product.name}</h2>
-                <div className="flex items-center space-x-4 text-primary font-bold text-sm uppercase tracking-widest">
+                <div className="flex justify-between items-start mb-2">
+                  <h2 className="text-3xl md:text-4xl font-bold dark:text-white">{product.name}</h2>
+                </div>
+                <div className="flex items-center space-x-4 text-primary font-bold text-sm uppercase tracking-widest mb-4">
                   <span>Premium Care</span>
                   <span className="w-1 h-1 bg-primary rounded-full" />
                   <span>ISO Certified</span>
                 </div>
+                <p className="text-3xl font-black text-primary">Rs. {product.price}</p>
               </div>
 
               <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed">
@@ -74,12 +87,32 @@ const ProductModal = ({ product, onClose }) => {
                 </div>
               </div>
 
-              <div className="pt-8 border-t border-slate-100 dark:border-slate-700">
+              <div className="pt-8 border-t border-slate-100 dark:border-slate-700 flex flex-col sm:flex-row gap-4">
+                <button
+                  onClick={handleAddToCart}
+                  className={`flex-grow py-5 rounded-2xl font-bold text-lg transition-all flex items-center justify-center gap-2 ${
+                    isAdded 
+                    ? 'bg-green-500 text-white shadow-lg shadow-green-500/20' 
+                    : 'bg-primary text-white shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 active:scale-95'
+                  }`}
+                >
+                  {isAdded ? (
+                    <>
+                      <Check size={24} />
+                      <span>Added to Cart</span>
+                    </>
+                  ) : (
+                    <>
+                      <ShoppingCart size={24} />
+                      <span>Add to Cart</span>
+                    </>
+                  )}
+                </button>
                 <button 
                   onClick={onClose}
-                  className="w-full bg-slate-100 dark:bg-slate-700 text-slate-800 dark:text-white py-5 rounded-2xl font-bold text-lg hover:bg-slate-200 dark:hover:bg-slate-600 transition-all active:scale-95"
+                  className="px-8 bg-slate-100 dark:bg-slate-700 text-slate-800 dark:text-white py-5 rounded-2xl font-bold text-lg hover:bg-slate-200 dark:hover:bg-slate-600 transition-all active:scale-95"
                 >
-                  Close Details
+                  Close
                 </button>
               </div>
             </div>

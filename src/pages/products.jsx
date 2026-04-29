@@ -1,18 +1,33 @@
 import React, { useState } from 'react';
 import products from "../data/products";
 import AnimatedSection from "../components/AnimatedSection";
-import { Info } from "lucide-react";
+import { Info, ShoppingCart, Check } from "lucide-react";
 import ProductModal from "../components/ProductModal";
+import { useCart } from "../context/CartContext";
 
 function Products() {
     const [selectedCategory, setSelectedCategory] = useState("All");
     const [viewingProduct, setViewingProduct] = useState(null);
+    const [addedIds, setAddedIds] = useState(new Set());
+    const { addToCart } = useCart();
 
     const categories = ["All", ...products.map(p => p.category)];
 
     const filteredProducts = selectedCategory === "All"
         ? products.flatMap(p => p.items)
         : products.find(p => p.category === selectedCategory)?.items || [];
+
+    const handleAddToCart = (product) => {
+        addToCart(product);
+        setAddedIds(prev => new Set(prev).add(product.id));
+        setTimeout(() => {
+            setAddedIds(prev => {
+                const next = new Set(prev);
+                next.delete(product.id);
+                return next;
+            });
+        }, 2000);
+    };
 
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-slate-900 pt-32 pb-20 px-6">
@@ -47,9 +62,9 @@ function Products() {
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
                     {filteredProducts.map((product, i) => (
                         <AnimatedSection key={product.id} delay={i * 0.05}>
-                            <div className="group bg-white dark:bg-slate-800 rounded-[32px] overflow-hidden border border-slate-100 dark:border-slate-700 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                            <div className="group bg-white dark:bg-slate-800 rounded-[32px] overflow-hidden border border-slate-100 dark:border-slate-700 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex flex-col h-full">
                                 {/* Image Container */}
-                                <div className="relative h-72 overflow-hidden">
+                                <div className="relative h-72 overflow-hidden shrink-0">
                                     <img
                                         src={product.image}
                                         alt={product.name}
@@ -60,29 +75,64 @@ function Products() {
                                             {product.tag}
                                         </span>
                                     </div>
-                                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
                                         <button
                                             onClick={(e) => { e.stopPropagation(); setViewingProduct(product); }}
-                                            className="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white hover:scale-110 transition-transform shadow-lg"
+                                            className="w-12 h-12 bg-white/20 hover:bg-white/40 backdrop-blur-md rounded-full flex items-center justify-center text-white transition-all hover:scale-110"
+                                            title="Quick View"
                                         >
-                                            <Info size={28} />
+                                            <Info size={20} />
+                                        </button>
+                                        <button
+                                            onClick={(e) => { e.stopPropagation(); handleAddToCart(product); }}
+                                            className={`w-12 h-12 ${addedIds.has(product.id) ? 'bg-green-500' : 'bg-primary'} rounded-full flex items-center justify-center text-white transition-all hover:scale-110 shadow-lg`}
+                                            title="Add to Cart"
+                                        >
+                                            {addedIds.has(product.id) ? <Check size={20} /> : <ShoppingCart size={20} />}
                                         </button>
                                     </div>
                                 </div>
 
                                 {/* Content */}
-                                <div className="p-8">
-                                    <h3 className="text-2xl font-bold dark:text-white mb-3">{product.name}</h3>
-                                    <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2">
+                                <div className="p-8 flex flex-col flex-grow">
+                                    <div className="flex justify-between items-start mb-3 gap-2">
+                                        <h3 className="text-2xl font-bold dark:text-white line-clamp-1">{product.name}</h3>
+                                        <span className="text-xl font-black text-primary whitespace-nowrap">Rs. {product.price}</span>
+                                    </div>
+                                    <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2 mb-6">
                                         {product.description}
                                     </p>
-                                    <div className="mt-8 pt-6 border-t border-slate-50 dark:border-slate-700 flex justify-between items-center">
-                                        <span className="text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Premium Quality</span>
+                                    
+                                    <div className="mt-auto pt-6 border-t border-slate-50 dark:border-slate-700 flex flex-col gap-4">
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Premium Quality</span>
+                                            <button
+                                                onClick={() => setViewingProduct(product)}
+                                                className="text-primary font-black text-sm hover:underline tracking-tight"
+                                            >
+                                                View Details
+                                            </button>
+                                        </div>
+                                        
                                         <button
-                                            onClick={() => setViewingProduct(product)}
-                                            className="text-primary font-black text-sm hover:underline tracking-tight"
+                                            onClick={() => handleAddToCart(product)}
+                                            className={`w-full py-4 rounded-2xl font-bold transition-all flex items-center justify-center gap-2 ${
+                                                addedIds.has(product.id) 
+                                                ? 'bg-green-500 text-white shadow-lg shadow-green-500/20' 
+                                                : 'bg-primary text-white shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 active:scale-95'
+                                            }`}
                                         >
-                                            View Details
+                                            {addedIds.has(product.id) ? (
+                                                <>
+                                                    <Check size={20} />
+                                                    <span>Added to Cart</span>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <ShoppingCart size={20} />
+                                                    <span>Add to Cart</span>
+                                                </>
+                                            )}
                                         </button>
                                     </div>
                                 </div>

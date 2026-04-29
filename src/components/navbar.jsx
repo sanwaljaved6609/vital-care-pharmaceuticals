@@ -1,12 +1,14 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useApp } from "../context/AppContext";
-import { Sun, Moon, Languages, Menu, X, ChevronRight } from "lucide-react";
+import { Sun, Moon, Languages, Menu, X, ChevronRight, ShoppingCart } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useCart } from "../context/CartContext";
 
 function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const { theme, toggleTheme, language, setLanguage, t } = useApp();
+    const { getCartCount } = useCart();
     const location = useLocation();
 
     // Close menu on route change
@@ -20,6 +22,8 @@ function Navbar() {
         { name: t.nav.products, path: "/products" },
         { name: t.nav.contact, path: "/contact" },
     ];
+
+    const cartCount = getCartCount();
 
     return (
         <nav className="sticky top-0 z-50 glass dark:bg-slate-900/80 transition-all duration-300">
@@ -52,6 +56,20 @@ function Navbar() {
 
                 {/* Controls */}
                 <div className="hidden lg:flex items-center space-x-6">
+                    {/* Cart Icon */}
+                    <Link
+                        to="/cart"
+                        className="relative p-2.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-300"
+                        title="Shopping Cart"
+                    >
+                        <ShoppingCart size={22} />
+                        {cartCount > 0 && (
+                            <span className="absolute top-0 right-0 bg-primary text-white text-[10px] font-black w-5 h-5 flex items-center justify-center rounded-full border-2 border-white dark:border-slate-900 animate-in zoom-in">
+                                {cartCount}
+                            </span>
+                        )}
+                    </Link>
+
                     {/* Language Switcher */}
                     <button
                         onClick={() => setLanguage(language === 'en' ? 'ur' : 'en')}
@@ -79,6 +97,17 @@ function Navbar() {
 
                 {/* Mobile Controls Toggle */}
                 <div className="lg:hidden flex items-center space-x-4">
+                    <Link
+                        to="/cart"
+                        className="relative p-2 rounded-full text-slate-600 dark:text-slate-300"
+                    >
+                        <ShoppingCart size={22} />
+                        {cartCount > 0 && (
+                            <span className="absolute top-0 right-0 bg-primary text-white text-[10px] font-black w-5 h-5 flex items-center justify-center rounded-full border-2 border-white dark:border-slate-900">
+                                {cartCount}
+                            </span>
+                        )}
+                    </Link>
                      <button
                         onClick={toggleTheme}
                         className="p-2 rounded-full text-slate-600 dark:text-slate-300"
